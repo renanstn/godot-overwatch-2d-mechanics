@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Nodes/BasicMovement2D.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Characters/blue_panel.png" type="Texture" id=2]
-
+[ext_resource path="res://Scripts/Nodes/ArmPointingToMouse2D.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/Characters/yellow_button01.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 50, 50 )
@@ -19,3 +20,13 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource( 1 )
+
+[node name="ArmPointingToMouse2D" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="Sprite2" type="Sprite" parent="ArmPointingToMouse2D"]
+position = Vector2( 30, 0 )
+texture = ExtResource( 4 )
+
+[node name="Gun2" type="Position2D" parent="ArmPointingToMouse2D"]
+position = Vector2( 135, 0 )

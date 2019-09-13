@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "ArmPointingToMouse2D",
+"language": "GDScript",
+"path": "res://Scripts/Nodes/ArmPointingToMouse2D.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "BasicMovement2D",
 "language": "GDScript",
 "path": "res://Scripts/Nodes/BasicMovement2D.gd"
 } ]
 _global_script_class_icons={
+"ArmPointingToMouse2D": "",
 "BasicMovement2D": ""
 }
 
