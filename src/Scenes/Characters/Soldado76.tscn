@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Nodes/BasicMovement2D.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Characters/blue_panel.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Nodes/ArmPointingToMouse2D.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/Characters/yellow_button01.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/Nodes/Weapon.gd" type="Script" id=5]
+[ext_resource path="res://Sprites/Characters/pistol.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 50, 50 )
@@ -23,6 +25,7 @@ shape = SubResource( 1 )
 
 [node name="ArmPointingToMouse2D" type="Node2D" parent="."]
 script = ExtResource( 3 )
+FIX_ROTATION = false
 
 [node name="Sprite2" type="Sprite" parent="ArmPointingToMouse2D"]
 position = Vector2( 30, 0 )
@@ -30,3 +33,16 @@ texture = ExtResource( 4 )
 
 [node name="Gun2" type="Position2D" parent="ArmPointingToMouse2D"]
 position = Vector2( 135, 0 )
+
+[node name="Weapon" type="Node2D" parent="ArmPointingToMouse2D/Gun2"]
+script = ExtResource( 5 )
+fire_point_path = NodePath("Position2D")
+
+[node name="Sprite" type="Sprite" parent="ArmPointingToMouse2D/Gun2/Weapon"]
+position = Vector2( 10.7249, 6.75264 )
+scale = Vector2( 0.0781963, 0.0781963 )
+texture = ExtResource( 6 )
+flip_h = true
+
+[node name="Position2D" type="Position2D" parent="ArmPointingToMouse2D/Gun2/Weapon"]
+position = Vector2( 55.2129, -23.8329 )

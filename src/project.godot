@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "BasicMovement2D",
 "language": "GDScript",
 "path": "res://Scripts/Nodes/BasicMovement2D.gd"
+}, {
+"base": "Node2D",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://Scripts/Nodes/Weapon.gd"
 } ]
 _global_script_class_icons={
 "ArmPointingToMouse2D": "",
-"BasicMovement2D": ""
+"BasicMovement2D": "",
+"Weapon": ""
 }
 
 [application]
