@@ -1,11 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Nodes/BasicMovement2D.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Characters/blue_panel.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Nodes/ArmPointingToMouse2D.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/Characters/yellow_button01.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/Nodes/Weapon.gd" type="Script" id=5]
-[ext_resource path="res://Sprites/Characters/pistol.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/Effects/BulletHit.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Effects/BulletTrail.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Sprites/Characters/pistol.png" type="Texture" id=8]
+[ext_resource path="res://Sounds/Effects/9_mm_gunshot-mike-koenig-123.wav" type="AudioStream" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 50, 50 )
@@ -25,7 +28,6 @@ shape = SubResource( 1 )
 
 [node name="ArmPointingToMouse2D" type="Node2D" parent="."]
 script = ExtResource( 3 )
-FIX_ROTATION = false
 
 [node name="Sprite2" type="Sprite" parent="ArmPointingToMouse2D"]
 position = Vector2( 30, 0 )
@@ -36,13 +38,22 @@ position = Vector2( 135, 0 )
 
 [node name="Weapon" type="Node2D" parent="ArmPointingToMouse2D/Gun2"]
 script = ExtResource( 5 )
+hit_animation_scene = ExtResource( 6 )
+bullet_trail_scene = ExtResource( 7 )
 fire_point_path = NodePath("Position2D")
+fire_sound_path = NodePath("Shoot")
+parent_node = NodePath("../../..")
+gun_type = 1
+recoil_time = 1.0
 
 [node name="Sprite" type="Sprite" parent="ArmPointingToMouse2D/Gun2/Weapon"]
 position = Vector2( 10.7249, 6.75264 )
 scale = Vector2( 0.0781963, 0.0781963 )
-texture = ExtResource( 6 )
+texture = ExtResource( 8 )
 flip_h = true
 
 [node name="Position2D" type="Position2D" parent="ArmPointingToMouse2D/Gun2/Weapon"]
 position = Vector2( 55.2129, -23.8329 )
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="ArmPointingToMouse2D/Gun2/Weapon"]
+stream = ExtResource( 9 )

@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/Characters/Soldado76.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 95.2264, 10 )
+extents = Vector2( 95.2264, 24.6289 )
 
 [node name="Test" type="Node2D"]
 
@@ -20,6 +20,21 @@ __meta__ = {
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 1122.84, 504.016 )
+scale = Vector2( 1.16, 4.56 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Platform2"]
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
 visible = false
 shape = SubResource( 1 )
 
