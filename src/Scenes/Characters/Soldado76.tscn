@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Nodes/BasicMovement2D.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Characters/blue_panel.png" type="Texture" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Scenes/Effects/BulletTrail.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Sprites/Characters/pistol.png" type="Texture" id=8]
 [ext_resource path="res://Sounds/Effects/9_mm_gunshot-mike-koenig-123.wav" type="AudioStream" id=9]
+[ext_resource path="res://Sounds/Effects/Stapler-SoundBible.com-374581609.wav" type="AudioStream" id=10]
+[ext_resource path="res://Sounds/Effects/Click-SoundBible.com-1387633738.wav" type="AudioStream" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 50, 50 )
@@ -41,10 +43,13 @@ script = ExtResource( 5 )
 hit_animation_scene = ExtResource( 6 )
 bullet_trail_scene = ExtResource( 7 )
 fire_point_path = NodePath("Position2D")
-fire_sound_path = NodePath("Shoot")
+fire_sound_path = NodePath("ShootSound")
+empty_bullets_sound_path = NodePath("EmptySound")
+reload_sound_path = NodePath("ReloadSound")
 parent_node = NodePath("../../..")
-gun_type = 1
-recoil_time = 1.0
+recoil_time = 0.1
+max_bullets = 20
+reload_time = 1.5
 
 [node name="Sprite" type="Sprite" parent="ArmPointingToMouse2D/Gun2/Weapon"]
 position = Vector2( 10.7249, 6.75264 )
@@ -55,5 +60,11 @@ flip_h = true
 [node name="Position2D" type="Position2D" parent="ArmPointingToMouse2D/Gun2/Weapon"]
 position = Vector2( 55.2129, -23.8329 )
 
-[node name="Shoot" type="AudioStreamPlayer2D" parent="ArmPointingToMouse2D/Gun2/Weapon"]
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="ArmPointingToMouse2D/Gun2/Weapon"]
 stream = ExtResource( 9 )
+
+[node name="ReloadSound" type="AudioStreamPlayer2D" parent="ArmPointingToMouse2D/Gun2/Weapon"]
+stream = ExtResource( 10 )
+
+[node name="EmptySound" type="AudioStreamPlayer2D" parent="ArmPointingToMouse2D/Gun2/Weapon"]
+stream = ExtResource( 11 )
