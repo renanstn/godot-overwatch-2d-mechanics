@@ -47,8 +47,9 @@ fire_sound_path = NodePath("ShootSound")
 empty_bullets_sound_path = NodePath("EmptySound")
 reload_sound_path = NodePath("ReloadSound")
 parent_node = NodePath("../../..")
+spread_rate = 0.5
 recoil_time = 0.1
-max_bullets = 20
+max_bullets = 200
 reload_time = 1.5
 
 [node name="Sprite" type="Sprite" parent="ArmPointingToMouse2D/Gun2/Weapon"]

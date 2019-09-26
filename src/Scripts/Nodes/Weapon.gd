@@ -11,6 +11,7 @@ export var reload_sound_path : NodePath
 export var parent_node : NodePath
 
 export (int, "Automatic", "SemiAutomatic", "Missile") var gun_type
+export (float, 0, 1) var spread_rate
 export (float, 0, 5) var recoil_time
 export (int, 1, 1000) var max_bullets
 export (float, 0, 10) var reload_time
@@ -48,31 +49,31 @@ func _ready():
 
 func _process(delta):
 	if gun_type == 0: # Automatic
-		if Input.is_action_pressed("fire"):
-			if can_fire and bullets > 0:
+		# Fire
+		if can_fire and Input.is_action_pressed("fire"):
+			if bullets > 0:
 				shoot()
 			else:
-				can_not_shoot()
+				empty_bullets()
+		# Reload
 		if Input.is_action_just_pressed("reload") and not reloading:
 			reload_start()
 			
 	elif gun_type == 1: # Semi automatic
-		if Input.is_action_just_pressed("fire"):
-			if can_fire and bullets > 0:
+		# Fire
+		if can_fire and Input.is_action_just_pressed("fire"):
+			if bullets > 0:
 				shoot()
 			else:
-				can_not_shoot()
+				empty_bullets()
+		# Reload
 		if Input.is_action_just_pressed("reload") and not reloading:
 			reload_start()
-				
+
 	elif gun_type == 2: # Missile
 		if Input.is_action_just_pressed("fire"):
 				if can_fire and bullets > 0:
 					pass
-
-func adjust_raycast_size() -> void:
-	var size_screen : Vector2 = get_viewport().get_visible_rect().size
-	raycast.set_cast_to(Vector2(0, size_screen.x))
 
 func create_raycast() -> void:
 	raycast = RayCast2D.new()
@@ -81,6 +82,17 @@ func create_raycast() -> void:
 	raycast.enabled = true
 	add_child(raycast)
 
+func adjust_raycast_size() -> void:
+	var size_screen : Vector2 = get_viewport().get_visible_rect().size
+	raycast.set_cast_to(Vector2(0, size_screen.x))
+	
+func spread_bullet() -> void:
+	# 22.5 degrees it's half of 45. 45 It's the max spread allowed.
+	var spread_angle : float = 22.5 * spread_rate
+	# Reset raycast angle before each fire.
+	raycast.rotation_degrees = -90
+	raycast.rotation_degrees += rand_range(-spread_angle, spread_angle)
+
 func create_timer(time : float,  callback : String) -> Timer:
 	var timer = Timer.new()
 	timer.one_shot = true
@@ -88,8 +100,7 @@ func create_timer(time : float,  callback : String) -> Timer:
 	timer.connect("timeout", self, callback)
 	add_child(timer)
 	return timer
-	
-	
+
 func shoot() -> void:
 	fire_sound.play()
 	emit_signal("shoot")
@@ -97,6 +108,7 @@ func shoot() -> void:
 	bullets -= 1
 	can_fire = false
 	recoil_timer.start()
+	spread_bullet()
 	var hit_something = raycast.get_collider()
 	if hit_something:
 		var collision_point = raycast.get_collision_point()
@@ -114,7 +126,7 @@ func reload_start() -> void:
 	reload_sound.play()
 	emit_signal("reloading")
 
-func can_not_shoot() -> void:
+func empty_bullets() -> void:
 	empty_bullets_sound.play()
 	emit_signal("no_bullets")
 
