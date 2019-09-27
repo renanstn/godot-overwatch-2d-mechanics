@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Nodes/BasicMovement2D.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Characters/blue_panel.png" type="Texture" id=2]
@@ -7,10 +7,11 @@
 [ext_resource path="res://Scripts/Nodes/Weapon.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Effects/BulletHit.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Effects/BulletTrail.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Sprites/Characters/pistol.png" type="Texture" id=8]
-[ext_resource path="res://Sounds/Effects/9_mm_gunshot-mike-koenig-123.wav" type="AudioStream" id=9]
-[ext_resource path="res://Sounds/Effects/Stapler-SoundBible.com-374581609.wav" type="AudioStream" id=10]
-[ext_resource path="res://Sounds/Effects/Click-SoundBible.com-1387633738.wav" type="AudioStream" id=11]
+[ext_resource path="res://Scenes/Effects/Capsule.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Sprites/Characters/pistol.png" type="Texture" id=9]
+[ext_resource path="res://Sounds/Effects/9_mm_gunshot-mike-koenig-123.wav" type="AudioStream" id=10]
+[ext_resource path="res://Sounds/Effects/Stapler-SoundBible.com-374581609.wav" type="AudioStream" id=11]
+[ext_resource path="res://Sounds/Effects/Click-SoundBible.com-1387633738.wav" type="AudioStream" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 50, 50 )
@@ -42,30 +43,35 @@ position = Vector2( 135, 0 )
 script = ExtResource( 5 )
 hit_animation_scene = ExtResource( 6 )
 bullet_trail_scene = ExtResource( 7 )
-fire_point_path = NodePath("Position2D")
+capsule_scene = ExtResource( 8 )
+fire_point_path = NodePath("ShootPoint")
+capsule_ejector_path = NodePath("EjectCapsule")
 fire_sound_path = NodePath("ShootSound")
 empty_bullets_sound_path = NodePath("EmptySound")
 reload_sound_path = NodePath("ReloadSound")
 parent_node = NodePath("../../..")
-spread_rate = 0.5
+spread_rate = 0.2
 recoil_time = 0.1
-max_bullets = 200
+max_bullets = 30
 reload_time = 1.5
 
 [node name="Sprite" type="Sprite" parent="ArmPointingToMouse2D/Gun2/Weapon"]
 position = Vector2( 10.7249, 6.75264 )
 scale = Vector2( 0.0781963, 0.0781963 )
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 flip_h = true
 
-[node name="Position2D" type="Position2D" parent="ArmPointingToMouse2D/Gun2/Weapon"]
+[node name="ShootPoint" type="Position2D" parent="ArmPointingToMouse2D/Gun2/Weapon"]
 position = Vector2( 55.2129, -23.8329 )
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="ArmPointingToMouse2D/Gun2/Weapon"]
-stream = ExtResource( 9 )
-
-[node name="ReloadSound" type="AudioStreamPlayer2D" parent="ArmPointingToMouse2D/Gun2/Weapon"]
 stream = ExtResource( 10 )
 
-[node name="EmptySound" type="AudioStreamPlayer2D" parent="ArmPointingToMouse2D/Gun2/Weapon"]
+[node name="ReloadSound" type="AudioStreamPlayer2D" parent="ArmPointingToMouse2D/Gun2/Weapon"]
 stream = ExtResource( 11 )
+
+[node name="EmptySound" type="AudioStreamPlayer2D" parent="ArmPointingToMouse2D/Gun2/Weapon"]
+stream = ExtResource( 12 )
+
+[node name="EjectCapsule" type="Position2D" parent="ArmPointingToMouse2D/Gun2/Weapon"]
+position = Vector2( 18.3631, -25.2642 )

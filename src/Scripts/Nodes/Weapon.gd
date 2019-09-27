@@ -4,7 +4,9 @@ class_name Weapon
 
 export var hit_animation_scene : PackedScene
 export var bullet_trail_scene : PackedScene
+export var capsule_scene : PackedScene
 export var fire_point_path : NodePath
+export var capsule_ejector_path : NodePath
 export var fire_sound_path : NodePath
 export var empty_bullets_sound_path : NodePath
 export var reload_sound_path : NodePath
@@ -23,6 +25,7 @@ var raycast : RayCast2D
 var recoil_timer : Timer
 var reload_timer : Timer
 var fire_point : Position2D
+var capsule_ejector : Position2D
 var fire_sound : AudioStreamPlayer2D
 var reload_sound : AudioStreamPlayer2D
 var empty_bullets_sound : AudioStreamPlayer2D
@@ -40,6 +43,7 @@ func _ready():
 	bullets = max_bullets
 	fire_point = get_node(fire_point_path)
 	fire_sound = get_node(fire_sound_path)
+	capsule_ejector = get_node(capsule_ejector_path)
 	empty_bullets_sound = get_node(empty_bullets_sound_path)
 	reload_sound = get_node(reload_sound_path)
 	recoil_timer = create_timer(recoil_time, "on_recoil_time_end")
@@ -109,6 +113,7 @@ func shoot() -> void:
 	can_fire = false
 	recoil_timer.start()
 	spread_bullet()
+	eject_capsule()
 	var hit_something = raycast.get_collider()
 	if hit_something:
 		var collision_point = raycast.get_collision_point()
@@ -151,3 +156,10 @@ func on_reload_time_end() -> void:
 	can_fire = true
 	emit_signal("reloaded")
 	emit_signal("update_bullets", bullets)
+
+func eject_capsule() -> void:
+	var capsule = capsule_scene.instance()
+	capsule.global_position = capsule_ejector.global_position
+	capsule.rotation = capsule_ejector.rotation
+	get_node(parent_node).get_owner().add_child(capsule)
+	

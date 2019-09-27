@@ -5,7 +5,7 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "pew"
-length = 0.5
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:region_rect")
 tracks/0/interp = 1
@@ -13,10 +13,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Rect2( 25, 97, 16, 35 ), Rect2( 25, 97, 16, 35 ), Rect2( 193, 55, 47, 135 ), Rect2( 313, 69, 57, 135 ), Rect2( 452, 67, 65, 167 ), Rect2( 608, 55, 70, 202 ) ]
+"values": [ Rect2( 25, 97, 16, 35 ), Rect2( 193, 55, 47, 135 ), Rect2( 313, 69, 57, 135 ), Rect2( 452, 67, 65, 167 ) ]
 }
 
 [node name="BulletHit" type="Node2D"]
