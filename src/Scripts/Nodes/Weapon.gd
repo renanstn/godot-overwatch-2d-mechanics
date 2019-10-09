@@ -159,7 +159,14 @@ func on_reload_time_end() -> void:
 
 func eject_capsule() -> void:
 	var capsule = capsule_scene.instance()
+	# Variável que auxilia a correção do ângulo caso o
+	# braço esteja com a escala invertida
+	var looking_to_right = get_parent().get_parent().scale.y
 	capsule.global_position = capsule_ejector.global_position
-	capsule.rotation = capsule_ejector.rotation
+	capsule.rotation = capsule_ejector.global_rotation * looking_to_right
+	# Aplicar impulso e rotação na capsula, sempre usando o
+	# 'looking_to_right' para corrigir a inversão de scale
+	capsule.apply_impulse(Vector2(0,0), Vector2(-100 * looking_to_right,-200))
+	capsule.add_torque(-500 * looking_to_right)
 	get_node(parent_node).get_owner().add_child(capsule)
 	
