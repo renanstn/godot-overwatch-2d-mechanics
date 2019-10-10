@@ -54,6 +54,7 @@ spread_rate = 0.2
 recoil_time = 0.1
 max_bullets = 30
 reload_time = 1.5
+eject_capsule = true
 
 [node name="Sprite" type="Sprite" parent="ArmPointingToMouse2D/Gun2/Weapon"]
 position = Vector2( 10.7249, 6.75264 )

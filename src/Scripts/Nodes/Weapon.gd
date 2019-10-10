@@ -17,6 +17,7 @@ export (float, 0, 1) var spread_rate
 export (float, 0, 5) var recoil_time
 export (int, 1, 1000) var max_bullets
 export (float, 0, 10) var reload_time
+export var eject_capsule : bool
 
 var can_fire : bool = true
 var reloading : bool = false
@@ -43,7 +44,8 @@ func _ready():
 	bullets = max_bullets
 	fire_point = get_node(fire_point_path)
 	fire_sound = get_node(fire_sound_path)
-	capsule_ejector = get_node(capsule_ejector_path)
+	if eject_capsule:
+		capsule_ejector = get_node(capsule_ejector_path)
 	empty_bullets_sound = get_node(empty_bullets_sound_path)
 	reload_sound = get_node(reload_sound_path)
 	recoil_timer = create_timer(recoil_time, "on_recoil_time_end")
@@ -113,7 +115,8 @@ func shoot() -> void:
 	can_fire = false
 	recoil_timer.start()
 	spread_bullet()
-	eject_capsule()
+	if eject_capsule:
+		eject_capsule()
 	var hit_something = raycast.get_collider()
 	if hit_something:
 		var collision_point = raycast.get_collision_point()
