@@ -14,7 +14,7 @@ class_name WeaponMissile
 	https://github.com/Doc-McCoy
 """
 
-export var hit_animation_scene : PackedScene
+export var missile_scene : PackedScene
 export var capsule_scene : PackedScene
 export var fire_point_path : NodePath
 export var capsule_ejector_path : NodePath
@@ -23,7 +23,6 @@ export var empty_bullets_sound_path : NodePath
 export var reload_sound_path : NodePath
 export var parent_node : NodePath
 
-export(int, 1, 1000) var missile_damage
 export(float, 0, 5) var recoil_time
 export(int, 1, 1000) var max_bullets
 export(float, 0, 10) var reload_time
@@ -91,9 +90,17 @@ func shoot() -> void:
 	emit_signal("update_bullets", bullets)
 	bullets -= 1
 	can_fire = false
+	var missile = missile_scene.instance()
+	# Variável que auxilia a correção do ângulo caso o braço esteja com a escala invertida
+	var looking_to_right = get_parent().get_parent().scale.y
+	missile.global_position = fire_point.global_position
+	missile.rotation = fire_point.global_rotation * looking_to_right
+	get_node(parent_node).get_owner().add_child(missile)
 	recoil_timer.start()
 	if eject_capsule:
 		eject_capsule()
+	if auto_reload:
+		reload_start()
 #	if hit_something:
 #		var collision_point = raycast.get_collision_point()
 #		var collide_with = raycast.get_collider()
@@ -120,13 +127,11 @@ func reload_start() -> void:
 
 func eject_capsule() -> void:
 	var capsule = capsule_scene.instance()
-	# Variável que auxilia a correção do ângulo caso o
-	# braço esteja com a escala invertida
+	# Variável que auxilia a correção do ângulo caso o braço esteja com a escala invertida
 	var looking_to_right = get_parent().get_parent().scale.y
 	capsule.global_position = capsule_ejector.global_position
 	capsule.rotation = capsule_ejector.global_rotation * looking_to_right
-	# Aplicar impulso e rotação na capsula, sempre usando o
-	# 'looking_to_right' para corrigir a inversão de scale
+	# Aplicar impulso e rotação na capsula, sempre usando o 'looking_to_right' para corrigir a inversão de scale
 	capsule.apply_impulse(Vector2(0,0), Vector2(-100 * looking_to_right,-200))
 	capsule.add_torque(-500 * looking_to_right)
 	get_node(parent_node).get_owner().add_child(capsule)
