@@ -12,11 +12,12 @@ export var empty_bullets_sound_path : NodePath
 export var reload_sound_path : NodePath
 export var parent_node : NodePath
 
-export (int, "Automatic", "SemiAutomatic", "Missile") var gun_type
-export (float, 0, 1) var spread_rate
-export (float, 0, 5) var recoil_time
-export (int, 1, 1000) var max_bullets
-export (float, 0, 10) var reload_time
+export(int, "Automatic", "SemiAutomatic") var gun_type
+export(int, 1, 1000) var bullet_damage
+export(float, 0, 1) var spread_rate
+export(float, 0, 5) var recoil_time
+export(int, 1, 1000) var max_bullets
+export(float, 0, 10) var reload_time
 export var eject_capsule : bool
 
 var can_fire : bool = true
@@ -38,6 +39,7 @@ signal hit_enemy
 signal no_bullets
 signal ready_to_fire
 signal update_bullets(how_many)
+signal cause_damage(how_much)
 
 
 func _ready():
@@ -75,11 +77,6 @@ func _process(delta):
 		# Reload
 		if Input.is_action_just_pressed("reload") and not reloading:
 			reload_start()
-
-	elif gun_type == 2: # Missile
-		if Input.is_action_just_pressed("fire"):
-				if can_fire and bullets > 0:
-					pass
 
 func create_raycast() -> void:
 	raycast = RayCast2D.new()
@@ -125,6 +122,7 @@ func shoot() -> void:
 		create_trail(raycast.get_global_position(), collision_point)
 		if "enemy" in collider_groups:
 			emit_signal("hit_enemy")
+			emit_signal("cause_damage", bullet_damage)
 		create_hit_animation(collision_point)
 
 func reload_start() -> void:
