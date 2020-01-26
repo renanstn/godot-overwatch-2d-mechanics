@@ -3,23 +3,23 @@ extends KinematicBody2D
 class_name BasicMovement2D
 
 """
-This script provides a basic player movement,
-with editable values, and options to sprint and fly.
-It also emits signals for each action.
-
-Copy this script to your project, and a new node
-'BasicMovement2D' will appear in godot's list, as a
-KinematicBody2D's child.
-
-Requirements:
-	The following inputs need to be created:
-	- 'left'
-	- 'right'
-	- 'sprint'
-	- 'jump'
-
-Credits: Renan Santana Desiderio
-https://github.com/Doc-McCoy
+	This script provides a basic player movement,
+	with editable values, and options to sprint and fly.
+	It also emits signals for each action.
+	
+	Copy this script to your project, and a new node
+	'BasicMovement2D' will appear in godot's list, as a
+	KinematicBody2D's child.
+	
+	Requirements:
+		The following inputs need to be created:
+		- 'left'
+		- 'right'
+		- 'sprint'
+		- 'jump'
+	
+	Credits: Renan Santana Desiderio
+	https://github.com/Doc-McCoy
 """
 
 const UP : Vector2 = Vector2(0, -1)

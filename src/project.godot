@@ -20,14 +20,20 @@ _global_script_classes=[ {
 "path": "res://Scripts/Nodes/BasicMovement2D.gd"
 }, {
 "base": "Node2D",
-"class": "Weapon",
+"class": "WeaponMissile",
 "language": "GDScript",
-"path": "res://Scripts/Nodes/Weapon.gd"
+"path": "res://Scripts/Nodes/WeaponMissile.gd"
+}, {
+"base": "Node2D",
+"class": "WeaponRaycast",
+"language": "GDScript",
+"path": "res://Scripts/Nodes/WeaponRaycast.gd"
 } ]
 _global_script_class_icons={
 "ArmPointingToMouse2D": "",
 "BasicMovement2D": "",
-"Weapon": ""
+"WeaponMissile": "",
+"WeaponRaycast": ""
 }
 
 [application]

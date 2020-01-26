@@ -1,6 +1,18 @@
 extends Node2D
 
-class_name Weapon
+class_name WeaponRaycast
+
+"""
+	This script provides a basic raycast weapon, with
+	multiples configurable parameters.
+	
+	Copy this script to your project, and a new node
+	'WeaponRaycast' will appear in godot's list, as a
+	Node2D's child.
+	
+	Credits: Renan Santana Desiderio
+	https://github.com/Doc-McCoy
+"""
 
 export var hit_animation_scene : PackedScene
 export var bullet_trail_scene : PackedScene
@@ -55,28 +67,30 @@ func _ready():
 	create_raycast()
 	adjust_raycast_size()
 
+
 func _process(delta):
 	if gun_type == 0: # Automatic
-		# Fire
+		# Fire --------------------------------------------
 		if can_fire and Input.is_action_pressed("fire"):
 			if bullets > 0:
 				shoot()
 			else:
 				empty_bullets()
-		# Reload
+		# Reload ------------------------------------------
 		if Input.is_action_just_pressed("reload") and not reloading:
 			reload_start()
 			
 	elif gun_type == 1: # Semi automatic
-		# Fire
+		# Fire --------------------------------------------
 		if can_fire and Input.is_action_just_pressed("fire"):
 			if bullets > 0:
 				shoot()
 			else:
 				empty_bullets()
-		# Reload
+		# Reload ------------------------------------------
 		if Input.is_action_just_pressed("reload") and not reloading:
 			reload_start()
+
 
 func create_raycast() -> void:
 	raycast = RayCast2D.new()
@@ -85,16 +99,19 @@ func create_raycast() -> void:
 	raycast.enabled = true
 	add_child(raycast)
 
+
 func adjust_raycast_size() -> void:
 	var size_screen : Vector2 = get_viewport().get_visible_rect().size
 	raycast.set_cast_to(Vector2(0, size_screen.x))
-	
+
+
 func spread_bullet() -> void:
 	# 22.5 degrees it's half of 45. 45 It's the max spread allowed.
 	var spread_angle : float = 22.5 * spread_rate
 	# Reset raycast angle before each fire.
 	raycast.rotation_degrees = -90
 	raycast.rotation_degrees += rand_range(-spread_angle, spread_angle)
+
 
 func create_timer(time : float,  callback : String) -> Timer:
 	var timer = Timer.new()
@@ -103,6 +120,7 @@ func create_timer(time : float,  callback : String) -> Timer:
 	timer.connect("timeout", self, callback)
 	add_child(timer)
 	return timer
+
 
 func shoot() -> void:
 	fire_sound.play()
@@ -125,6 +143,7 @@ func shoot() -> void:
 			emit_signal("cause_damage", bullet_damage)
 		create_hit_animation(collision_point)
 
+
 func reload_start() -> void:
 	reloading = true
 	can_fire = false
@@ -132,14 +151,17 @@ func reload_start() -> void:
 	reload_sound.play()
 	emit_signal("reloading")
 
+
 func empty_bullets() -> void:
 	empty_bullets_sound.play()
 	emit_signal("no_bullets")
+
 
 func create_trail(to : Vector2, from : Vector2) -> void:
 	var trail = bullet_trail_scene.instance()
 	trail.setup(to, from)
 	get_node(parent_node).get_owner().add_child(trail)
+
 
 func create_hit_animation(collision_point : Vector2) -> void:
 	var hit_animation = hit_animation_scene.instance()
@@ -147,16 +169,19 @@ func create_hit_animation(collision_point : Vector2) -> void:
 	hit_animation.rotation_degrees = rand_range(0, 360)
 	get_node(parent_node).get_owner().add_child(hit_animation)
 
+
 func on_recoil_time_end() -> void:
 	can_fire = true
 	emit_signal("ready_to_fire")
-	
+
+
 func on_reload_time_end() -> void:
 	reloading = false
 	bullets = max_bullets
 	can_fire = true
 	emit_signal("reloaded")
 	emit_signal("update_bullets", bullets)
+
 
 func eject_capsule() -> void:
 	var capsule = capsule_scene.instance()
@@ -170,4 +195,3 @@ func eject_capsule() -> void:
 	capsule.apply_impulse(Vector2(0,0), Vector2(-100 * looking_to_right,-200))
 	capsule.add_torque(-500 * looking_to_right)
 	get_node(parent_node).get_owner().add_child(capsule)
-	
