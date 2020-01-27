@@ -101,15 +101,6 @@ func shoot() -> void:
 		eject_capsule()
 	if auto_reload:
 		reload_start()
-#	if hit_something:
-#		var collision_point = raycast.get_collision_point()
-#		var collide_with = raycast.get_collider()
-#		var collider_groups = collide_with.get_groups()
-#		create_trail(raycast.get_global_position(), collision_point)
-#		if "enemy" in collider_groups:
-#			emit_signal("hit_enemy")
-#			emit_signal("cause_damage", bullet_damage)
-#		create_hit_animation(collision_point)
 
 
 func empty_bullets() -> void:

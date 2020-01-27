@@ -58,5 +58,6 @@ func _on_Area2D_body_entered(body):
 	var body_groups = body.get_groups()
 	if "enemy" in body_groups:
 		emit_signal("hit_enemy")
+		emit_signal("cause_damage", damage)
 	create_hit_animation(position)
 	queue_free()

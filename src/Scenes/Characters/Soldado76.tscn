@@ -28,20 +28,20 @@ __meta__ = {
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 1 )
 
 [node name="ArmPointingToMouse2D" type="Node2D" parent="."]
 script = ExtResource( 3 )
 
 [node name="Sprite2" type="Sprite" parent="ArmPointingToMouse2D"]
-position = Vector2( 30, 0 )
+position = Vector2( 12.0379, 0 )
+scale = Vector2( 0.810925, 1 )
 texture = ExtResource( 4 )
 
-[node name="Gun2" type="Position2D" parent="ArmPointingToMouse2D"]
-position = Vector2( 135, 0 )
+[node name="Gun" type="Position2D" parent="ArmPointingToMouse2D"]
+position = Vector2( 91.292, 0 )
 
-[node name="WeaponRaycast" type="Node2D" parent="ArmPointingToMouse2D/Gun2"]
+[node name="WeaponRaycast" type="Node2D" parent="ArmPointingToMouse2D/Gun"]
 editor/display_folded = true
 script = ExtResource( 5 )
 hit_animation_scene = ExtResource( 6 )
@@ -59,38 +59,39 @@ recoil_time = 0.1
 max_bullets = 25
 reload_time = 1.55
 eject_capsule = true
+auto_reload = true
 
-[node name="Sprite" type="Sprite" parent="ArmPointingToMouse2D/Gun2/WeaponRaycast"]
+[node name="Sprite" type="Sprite" parent="ArmPointingToMouse2D/Gun/WeaponRaycast"]
 position = Vector2( 10.7249, 6.75264 )
 scale = Vector2( 0.0781963, 0.0781963 )
 texture = ExtResource( 9 )
 flip_h = true
 
-[node name="ShootPoint" type="Position2D" parent="ArmPointingToMouse2D/Gun2/WeaponRaycast"]
+[node name="ShootPoint" type="Position2D" parent="ArmPointingToMouse2D/Gun/WeaponRaycast"]
 position = Vector2( 55.2129, -23.8329 )
 
-[node name="ShootSound" type="AudioStreamPlayer2D" parent="ArmPointingToMouse2D/Gun2/WeaponRaycast"]
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="ArmPointingToMouse2D/Gun/WeaponRaycast"]
 stream = ExtResource( 10 )
 
-[node name="ReloadSound" type="AudioStreamPlayer2D" parent="ArmPointingToMouse2D/Gun2/WeaponRaycast"]
+[node name="ReloadSound" type="AudioStreamPlayer2D" parent="ArmPointingToMouse2D/Gun/WeaponRaycast"]
 stream = ExtResource( 11 )
 
-[node name="EmptySound" type="AudioStreamPlayer2D" parent="ArmPointingToMouse2D/Gun2/WeaponRaycast"]
+[node name="EmptySound" type="AudioStreamPlayer2D" parent="ArmPointingToMouse2D/Gun/WeaponRaycast"]
 stream = ExtResource( 12 )
 
-[node name="EjectCapsule" type="Position2D" parent="ArmPointingToMouse2D/Gun2/WeaponRaycast"]
+[node name="EjectCapsule" type="Position2D" parent="ArmPointingToMouse2D/Gun/WeaponRaycast"]
 position = Vector2( 18.3631, -25.2642 )
 
-[node name="WeaponMissile" type="Node2D" parent="ArmPointingToMouse2D/Gun2"]
+[node name="WeaponMissile" type="Node2D" parent="ArmPointingToMouse2D/Gun"]
 editor/display_folded = true
 script = ExtResource( 13 )
 missile_scene = ExtResource( 14 )
 capsule_scene = ExtResource( 8 )
-fire_point_path = NodePath("ShootPoint")
-capsule_ejector_path = NodePath("EjectCapsule")
-fire_sound_path = NodePath("../WeaponRaycast/ShootSound")
-empty_bullets_sound_path = NodePath("../WeaponRaycast/EmptySound")
-reload_sound_path = NodePath("../WeaponRaycast/ReloadSound")
+fire_point_path = NodePath("../../Gun/WeaponMissile/ShootPoint")
+capsule_ejector_path = NodePath("../../Gun/WeaponMissile/EjectCapsule")
+fire_sound_path = NodePath("../../Gun/WeaponRaycast/ShootSound")
+empty_bullets_sound_path = NodePath("../../Gun/WeaponRaycast/EmptySound")
+reload_sound_path = NodePath("../../Gun/WeaponRaycast/ReloadSound")
 parent_node = NodePath("../../..")
 recoil_time = 1.0
 max_bullets = 1
@@ -98,8 +99,8 @@ reload_time = 5.0
 auto_reload = true
 eject_capsule = true
 
-[node name="ShootPoint" type="Position2D" parent="ArmPointingToMouse2D/Gun2/WeaponMissile"]
+[node name="ShootPoint" type="Position2D" parent="ArmPointingToMouse2D/Gun/WeaponMissile"]
 position = Vector2( 49.0965, -6.58611 )
 
-[node name="EjectCapsule" type="Position2D" parent="ArmPointingToMouse2D/Gun2/WeaponMissile"]
+[node name="EjectCapsule" type="Position2D" parent="ArmPointingToMouse2D/Gun/WeaponMissile"]
 position = Vector2( -9.5798, 25.147 )

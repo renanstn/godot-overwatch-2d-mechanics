@@ -30,7 +30,8 @@ export(float, 0, 1) var spread_rate
 export(float, 0, 5) var recoil_time
 export(int, 1, 1000) var max_bullets
 export(float, 0, 10) var reload_time
-export var eject_capsule : bool
+export(bool) var eject_capsule
+export(bool) var auto_reload
 
 var can_fire : bool = true
 var reloading : bool = false
@@ -91,6 +92,9 @@ func _process(delta):
 		if Input.is_action_just_pressed("reload") and not reloading:
 			reload_start()
 
+	# Auto reload
+	if auto_reload and bullets < 1 and not reloading:
+		reload_start()
 
 func create_raycast() -> void:
 	raycast = RayCast2D.new()
