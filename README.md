@@ -11,5 +11,5 @@
 - :clock9: Node de ataque físico
 - :clock9: Node de escudo
 
-## Personagens prontos (somente mecânicas, sem sprite):
+## Personagens prontos (somente mecânicas, sem sprites):
 - :clock9: Soldado 76
