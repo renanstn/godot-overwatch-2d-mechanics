@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Sprites/GUI/green_button02.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/Characters/Soldado76.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Characters/Tracer.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 95.2264, 24.6289 )
@@ -60,4 +60,4 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="BasicMovement2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( 645.457, 552.968 )
+position = Vector2( 536.217, 458.861 )

@@ -34,7 +34,7 @@ shape = SubResource( 1 )
 script = ExtResource( 3 )
 
 [node name="Sprite2" type="Sprite" parent="ArmPointingToMouse2D"]
-position = Vector2( 12.0379, 0 )
+position = Vector2( 12, 0 )
 scale = Vector2( 0.810925, 1 )
 texture = ExtResource( 4 )
 
@@ -42,7 +42,6 @@ texture = ExtResource( 4 )
 position = Vector2( 91.292, 0 )
 
 [node name="WeaponRaycast" type="Node2D" parent="ArmPointingToMouse2D/Gun"]
-editor/display_folded = true
 script = ExtResource( 5 )
 hit_animation_scene = ExtResource( 6 )
 bullet_trail_scene = ExtResource( 7 )

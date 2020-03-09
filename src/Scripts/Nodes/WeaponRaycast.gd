@@ -127,7 +127,8 @@ func create_timer(time : float,  callback : String) -> Timer:
 
 
 func shoot() -> void:
-	fire_sound.play()
+	if fire_sound is AudioStreamPlayer2D:
+		fire_sound.play()
 	emit_signal("shoot")
 	emit_signal("update_bullets", bullets)
 	bullets -= 1
@@ -152,12 +153,14 @@ func reload_start() -> void:
 	reloading = true
 	can_fire = false
 	reload_timer.start()
-	reload_sound.play()
+	if reload_sound is AudioStreamPlayer2D:
+		reload_sound.play()
 	emit_signal("reloading")
 
 
 func empty_bullets() -> void:
-	empty_bullets_sound.play()
+	if empty_bullets_sound is AudioStreamPlayer2D:
+		empty_bullets_sound.play()
 	emit_signal("no_bullets")
 
 
