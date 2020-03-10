@@ -31,6 +31,7 @@ scale = Vector2( 0.8, 1 )
 texture = ExtResource( 4 )
 
 [node name="Gun" type="Position2D" parent="ArmPointingToMouse2D"]
+editor/display_folded = true
 position = Vector2( 87, 0 )
 
 [node name="WeaponRaycast" type="Node2D" parent="ArmPointingToMouse2D/Gun"]
@@ -43,7 +44,7 @@ capsule_ejector_path = NodePath("../EjectCapsule")
 parent_node = NodePath("../../..")
 spread_rate = 0.3
 recoil_time = 0.1
-max_bullets = 40
+max_bullets = 20
 reload_time = 3.0
 eject_capsule = true
 auto_reload = true
@@ -58,4 +59,47 @@ flip_h = true
 position = Vector2( 55.0159, -30.8089 )
 
 [node name="EjectCapsule" type="Position2D" parent="ArmPointingToMouse2D/Gun"]
+position = Vector2( 21.5663, -31.6892 )
+
+[node name="ArmPointingToMouse2D2" type="Node2D" parent="."]
+rotation = -0.0851311
+script = ExtResource( 3 )
+offset = 40.0
+
+[node name="Sprite" type="Sprite" parent="ArmPointingToMouse2D2"]
+position = Vector2( 12, 0 )
+scale = Vector2( 0.8, 1 )
+z_index = -1
+texture = ExtResource( 4 )
+
+[node name="Gun" type="Position2D" parent="ArmPointingToMouse2D2"]
+editor/display_folded = true
+position = Vector2( 87, 0 )
+
+[node name="WeaponRaycast" type="Node2D" parent="ArmPointingToMouse2D2/Gun"]
+script = ExtResource( 5 )
+hit_animation_scene = ExtResource( 6 )
+bullet_trail_scene = ExtResource( 7 )
+capsule_scene = ExtResource( 8 )
+fire_point_path = NodePath("../ShootPoint")
+capsule_ejector_path = NodePath("../EjectCapsule")
+parent_node = NodePath("../../..")
+spread_rate = 0.3
+recoil_time = 0.1
+max_bullets = 20
+reload_time = 3.0
+eject_capsule = true
+auto_reload = true
+
+[node name="Sprite" type="Sprite" parent="ArmPointingToMouse2D2/Gun"]
+position = Vector2( 13, 0 )
+scale = Vector2( 0.078, 0.078 )
+z_index = -1
+texture = ExtResource( 9 )
+flip_h = true
+
+[node name="ShootPoint" type="Position2D" parent="ArmPointingToMouse2D2/Gun"]
+position = Vector2( 55.0159, -30.8089 )
+
+[node name="EjectCapsule" type="Position2D" parent="ArmPointingToMouse2D2/Gun"]
 position = Vector2( 21.5663, -31.6892 )

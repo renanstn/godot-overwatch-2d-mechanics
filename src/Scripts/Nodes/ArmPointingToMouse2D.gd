@@ -15,6 +15,9 @@ https://github.com/Doc-McCoy
 """
 
 export var FIX_ROTATION : bool = true
+export(float) var offset = 0
+# TODO criar uma variação de ângulo para que fique perceptível
+# um outro braço segurando uma arma ao fundo do player
 
 func _process(delta):
 	look_to_mouse()
