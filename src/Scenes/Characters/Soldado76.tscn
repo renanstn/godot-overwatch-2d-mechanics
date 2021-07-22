@@ -48,16 +48,15 @@ bullet_trail_scene = ExtResource( 7 )
 capsule_scene = ExtResource( 8 )
 fire_point_path = NodePath("../WeaponRaycast/ShootPoint")
 capsule_ejector_path = NodePath("../WeaponRaycast/EjectCapsule")
-fire_sound_path = NodePath("../WeaponRaycast/ShootSound")
-empty_bullets_sound_path = NodePath("../WeaponRaycast/EmptySound")
-reload_sound_path = NodePath("../WeaponRaycast/ReloadSound")
+fire_sound_path = NodePath("ShootSound")
+empty_bullets_sound_path = NodePath("EmptySound")
+reload_sound_path = NodePath("ReloadSound")
 parent_node = NodePath("../../..")
 bullet_damage = 20
 spread_rate = 0.2
 recoil_time = 0.1
 max_bullets = 25
 reload_time = 1.55
-eject_capsule = true
 auto_reload = true
 
 [node name="Sprite" type="Sprite" parent="ArmPointingToMouse2D/Gun/WeaponRaycast"]
@@ -82,7 +81,6 @@ stream = ExtResource( 12 )
 position = Vector2( 18.3631, -25.2642 )
 
 [node name="WeaponMissile" type="Node2D" parent="ArmPointingToMouse2D/Gun"]
-editor/display_folded = true
 script = ExtResource( 13 )
 missile_scene = ExtResource( 14 )
 capsule_scene = ExtResource( 8 )
@@ -96,7 +94,6 @@ recoil_time = 1.0
 max_bullets = 1
 reload_time = 5.0
 auto_reload = true
-eject_capsule = true
 
 [node name="ShootPoint" type="Position2D" parent="ArmPointingToMouse2D/Gun/WeaponMissile"]
 position = Vector2( 49.0965, -6.58611 )

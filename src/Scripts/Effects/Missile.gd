@@ -35,7 +35,7 @@ func _ready():
 		speed = initial_speed
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if speed_increase:
 		velocity = Vector2(speed, 0).rotated(rotation)
 		velocity = move_and_slide(velocity)

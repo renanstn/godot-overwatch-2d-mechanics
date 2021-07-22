@@ -27,7 +27,7 @@ export(float, 0, 5) var recoil_time
 export(int, 1, 1000) var max_bullets
 export(float, 0, 10) var reload_time
 export(bool) var auto_reload = false
-export var eject_capsule : bool
+export var can_eject_capsule : bool
 
 var can_fire : bool = true
 var reloading : bool = false
@@ -54,7 +54,7 @@ func _ready():
 	bullets = max_bullets
 	fire_point = get_node(fire_point_path)
 	fire_sound = get_node(fire_sound_path)
-	if eject_capsule:
+	if can_eject_capsule:
 		capsule_ejector = get_node(capsule_ejector_path)
 	empty_bullets_sound = get_node(empty_bullets_sound_path)
 	reload_sound = get_node(reload_sound_path)
@@ -62,7 +62,7 @@ func _ready():
 	reload_timer = create_timer(reload_time, "on_reload_time_end")
 
 
-func _process(delta):
+func _process(_delta):
 	# Fire ------------------------------------------------
 	if can_fire and Input.is_action_just_pressed("alternative_fire"):
 		if bullets > 0:
@@ -97,7 +97,7 @@ func shoot() -> void:
 	missile.rotation = fire_point.global_rotation * looking_to_right
 	get_node(parent_node).get_owner().add_child(missile)
 	recoil_timer.start()
-	if eject_capsule:
+	if can_eject_capsule:
 		eject_capsule()
 	if auto_reload:
 		reload_start()

@@ -9,7 +9,6 @@ extents = Vector2( 95.2264, 24.6289 )
 [node name="Test" type="Node2D"]
 
 [node name="Platform" type="StaticBody2D" parent="."]
-editor/display_folded = true
 position = Vector2( 647.973, 640 )
 scale = Vector2( 6.36, 1 )
 collision_layer = 3
@@ -26,7 +25,6 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="Platform2" type="StaticBody2D" parent="."]
-editor/display_folded = true
 position = Vector2( 1122.84, 504.016 )
 scale = Vector2( 1.16, 4.56 )
 collision_layer = 3
@@ -43,7 +41,6 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="Platform3" type="StaticBody2D" parent="."]
-editor/display_folded = true
 position = Vector2( 185.779, 567.307 )
 scale = Vector2( 1.16, 2 )
 collision_layer = 3

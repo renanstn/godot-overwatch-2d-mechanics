@@ -7,5 +7,5 @@ func setup(origem : Vector2, destino : Vector2) -> void:
 func _ready():
 	$AnimationPlayer.play("Fade")
 
-func _on_AnimationPlayer_animation_finished(anim_name):
+func _on_AnimationPlayer_animation_finished(_anim_name):
 	queue_free()

@@ -40,7 +40,6 @@ margin_bottom = 541.0
 alignment = 1
 
 [node name="ButtonSoldado" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-editor/display_folded = true
 margin_left = 127.0
 margin_right = 329.0
 margin_bottom = 55.0
@@ -57,7 +56,6 @@ align = 1
 valign = 1
 
 [node name="ButtonPharah" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-editor/display_folded = true
 margin_left = 333.0
 margin_right = 535.0
 margin_bottom = 55.0
@@ -73,7 +71,6 @@ align = 1
 valign = 1
 
 [node name="ButtonMcCree" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-editor/display_folded = true
 margin_left = 539.0
 margin_right = 741.0
 margin_bottom = 55.0
@@ -89,7 +86,6 @@ align = 1
 valign = 1
 
 [node name="ButtonJunkrat" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-editor/display_folded = true
 margin_left = 745.0
 margin_right = 947.0
 margin_bottom = 55.0
@@ -105,7 +101,6 @@ align = 1
 valign = 1
 
 [node name="ButtonReinhardt" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-editor/display_folded = true
 margin_left = 951.0
 margin_right = 1153.0
 margin_bottom = 55.0
@@ -119,4 +114,5 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Reinhardt"
 align = 1
 valign = 1
+
 [connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxContainer/ButtonSoldado" to="." method="_on_ButtonSoldado_button_up"]

@@ -3,16 +3,17 @@ extends Node2D
 class_name WeaponRaycast
 
 """
-	This script provides a basic raycast weapon, with
-	multiples configurable parameters.
-	
-	Copy this script to your project, and a new node
-	'WeaponRaycast' will appear in godot's list, as a
-	Node2D's child.
-	
-	Credits: Renan Santana Desiderio
-	https://github.com/Doc-McCoy
+This script provides a basic raycast weapon, with
+multiples configurable parameters.
+
+Copy this script to your project, and a new node
+'WeaponRaycast' will appear in godot's list, as a
+Node2D's child.
+
+Credits: Renan Santana Desiderio
+https://github.com/renanstd
 """
+
 
 export var hit_animation_scene : PackedScene
 export var bullet_trail_scene : PackedScene
@@ -30,7 +31,7 @@ export(float, 0, 1) var spread_rate
 export(float, 0, 5) var recoil_time
 export(int, 1, 1000) var max_bullets
 export(float, 0, 10) var reload_time
-export(bool) var eject_capsule
+export(bool) var can_eject_capsule
 export(bool) var auto_reload
 
 var can_fire : bool = true
@@ -59,7 +60,7 @@ func _ready():
 	bullets = max_bullets
 	fire_point = get_node(fire_point_path)
 	fire_sound = get_node(fire_sound_path)
-	if eject_capsule:
+	if can_eject_capsule:
 		capsule_ejector = get_node(capsule_ejector_path)
 	empty_bullets_sound = get_node(empty_bullets_sound_path)
 	reload_sound = get_node(reload_sound_path)
@@ -69,7 +70,7 @@ func _ready():
 	adjust_raycast_size()
 
 
-func _process(delta):
+func _process(_delta):
 	if gun_type == 0: # Automatic
 		# Fire --------------------------------------------
 		if can_fire and Input.is_action_pressed("fire"):
@@ -80,7 +81,7 @@ func _process(delta):
 		# Reload ------------------------------------------
 		if Input.is_action_just_pressed("reload") and not reloading:
 			reload_start()
-			
+
 	elif gun_type == 1: # Semi automatic
 		# Fire --------------------------------------------
 		if can_fire and Input.is_action_just_pressed("fire"):
@@ -95,6 +96,7 @@ func _process(delta):
 	# Auto reload
 	if auto_reload and bullets < 1 and not reloading:
 		reload_start()
+
 
 func create_raycast() -> void:
 	raycast = RayCast2D.new()
@@ -135,7 +137,7 @@ func shoot() -> void:
 	can_fire = false
 	recoil_timer.start()
 	spread_bullet()
-	if eject_capsule:
+	if can_eject_capsule:
 		eject_capsule()
 	var hit_something = raycast.get_collider()
 	if hit_something:
