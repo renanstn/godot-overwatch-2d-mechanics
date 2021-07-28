@@ -1,5 +1,7 @@
 # Overwatch mechanics in Godot 2D
 
+[![Godot Engine](https://img.shields.io/badge/GODOT-%23FFFFFF.svg?style=flat&logo=godot-engine)](https://godotengine.org/)
+
 ## Itens base em desenvolvimento:
 - :white_check_mark: Node de movimentação de personagem terrestre
 - :white_check_mark: Node de movimentação de personagem voador
