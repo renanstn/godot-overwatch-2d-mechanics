@@ -57,6 +57,7 @@ spread_rate = 0.2
 recoil_time = 0.1
 max_bullets = 25
 reload_time = 1.55
+can_eject_capsule = true
 auto_reload = true
 
 [node name="Sprite" type="Sprite" parent="ArmPointingToMouse2D/Gun/WeaponRaycast"]

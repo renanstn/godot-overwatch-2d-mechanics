@@ -3,15 +3,15 @@ extends Node2D
 class_name WeaponMissile
 
 """
-	This script provides a basic missile weapon, with
-	multiples configurable parameters.
-	
-	Copy this script to your project, and a new node
-	'WeaponMissile' will appear in godot's list, as a
-	Node2D's child.
-	
-	Credits: Renan Santana Desiderio
-	https://github.com/Doc-McCoy
+This script provides a basic missile weapon, with
+multiples configurable parameters.
+
+Copy this script to your project, and a new node
+'WeaponMissile' will appear in godot's list, as a
+Node2D's child.
+
+Credits: Renan Santana Desiderio
+https://github.com/renanstd
 """
 
 export var missile_scene : PackedScene

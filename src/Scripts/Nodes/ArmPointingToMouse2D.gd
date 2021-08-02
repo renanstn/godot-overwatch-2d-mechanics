@@ -14,11 +14,8 @@ Credits: Renan Santana Desiderio
 https://github.com/renanstd
 """
 
+export var FIX_ROTATION: bool = true
 
-export var FIX_ROTATION : bool = true
-export(float) var offset = 0
-# TODO criar uma variação de ângulo para que fique perceptível
-# um outro braço segurando uma arma ao fundo do player
 
 func _process(_delta):
 	look_to_mouse()

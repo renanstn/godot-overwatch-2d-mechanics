@@ -14,7 +14,6 @@ Credits: Renan Santana Desiderio
 https://github.com/renanstd
 """
 
-
 export var hit_animation_scene : PackedScene
 export var bullet_trail_scene : PackedScene
 export var capsule_scene : PackedScene
